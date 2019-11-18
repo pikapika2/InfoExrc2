@@ -1,4 +1,4 @@
-
+package src;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,7 +27,7 @@ public class Tutorial extends JPanel implements ActionListener{
 
 	// ICRAFT = Player's position
 	private final int ICRAFT_X = 30; // x coordinate of the craft. can't be changed by the player
-	private final int ICRAFT_Y = 142; // initial y coordinate of the craft
+	private final int ICRAFT_Y = 500; // initial y coordinate of the craft
 	private final int DELAY = 15; //delay between each refreshing the frame, in millisecond (nearly 60FPS)
 
 	private Timer timer;
@@ -240,7 +240,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		//g.drawImage(back.getImage(), -back.getPosX(), 0, this);
 		g.drawImage(back.getImage(), 0, -back.getPosY(), this);
 		//2019-11-02
-		if (back.getPosY() + 500 > back.getHeight()) {
+		if (back.getPosY() + 700 > back.getHeight()) {
             g.drawImage(back.getImage(), 0, - back.getPosY() + back.getHeight(), this);
         }
 
@@ -311,7 +311,7 @@ public class Tutorial extends JPanel implements ActionListener{
         //it's made of simple rectangles drawn on the top of the game board
         if(paused){
         	g.setColor(new Color(0,0,0,150));
-        	g.fillRect(0, 0, 500, 500);
+        	g.fillRect(0, 0, 500, 800);
         	g.setColor(Color.gray);
         	g.fillRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 60);
         	g.setColor(Color.black);
@@ -325,7 +325,7 @@ public class Tutorial extends JPanel implements ActionListener{
         if (tuto) {
         	if(tuto_mv){
             	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
+            	g.fillRect(0, 0, 500, 800);
             	g.setColor(Color.gray);
             	g.fillRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 80);
             	g.setColor(Color.black);
@@ -339,7 +339,7 @@ public class Tutorial extends JPanel implements ActionListener{
             }
             if(tuto_st){
             	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
+            	g.fillRect(0, 0, 500, 800);
             	g.setColor(Color.gray);
             	g.fillRect(B_WIDTH/2 - 175, B_HEIGHT/2 - 25, 350, 80);
             	g.setColor(Color.black);
@@ -353,7 +353,7 @@ public class Tutorial extends JPanel implements ActionListener{
             }
             if(tuto_dm){
             	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
+            	g.fillRect(0, 0, 500, 800);
             	g.setColor(Color.gray);
             	g.fillRect(B_WIDTH/2 - 200, B_HEIGHT/2 - 35, 400, 100);
             	g.setColor(Color.black);
@@ -368,7 +368,7 @@ public class Tutorial extends JPanel implements ActionListener{
             }
             if(tuto_it){                            //after
             	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
+            	g.fillRect(0, 0, 500, 800);
             	g.setColor(Color.gray);
             	g.fillRect(0, B_HEIGHT/2 - 25, 480, 80);
             	g.setColor(Color.black);
@@ -554,7 +554,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		walls.removeAll(walls);
 		bonus.removeAll(bonus);
 
-		boss = new Boss(450,142);
+		boss = new Boss(230,30);
 
 		Frame.getFrame().playBossTheme();
 	}
