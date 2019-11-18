@@ -32,7 +32,7 @@ public class Alien2 extends Sprite{
 	public void move(){
 
 		//if(x+width<0){
-		if(y -500 > height) {
+		if(y - 800 > height) {
 			vis = false;
 			i = 0;
 		}

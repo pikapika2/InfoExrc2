@@ -476,7 +476,7 @@ public class Game extends JPanel implements ActionListener{
 		walls.removeAll(walls);
 		bonus.removeAll(bonus);
 
-		boss = new Boss(450,142);
+		boss = new Boss(230, 30);//x = 450 y = 142
 
 		Frame.getFrame().playBossTheme();
 	}
