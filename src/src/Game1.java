@@ -53,7 +53,7 @@ public class Game1 extends JPanel implements ActionListener{
 	private final int B_WIDTH = 480; //width of the board
 	private final int B_HEIGHT = 680; //height of the board 340
 
-	private ArrayList<Alien> aliens; //list of visible aliens
+	private ArrayList<Alien1> aliens; //list of visible aliens
 	private ArrayList<Wall> walls; //list of visible walls
 	private ArrayList<Life> lives; //list of visible bonus lives
 	private ArrayList<Alien2> aliens2; //list of visible aliens2
@@ -121,7 +121,7 @@ public class Game1 extends JPanel implements ActionListener{
 		back = new Background();
 
 		//initialization of the different speeds for the sprites
-		Alien.setSpeed(3);
+		Alien1.setSpeed(3);
 		Life.setSpeed(5);
 		Bonus.setSpeed(5);
 
@@ -223,10 +223,10 @@ public class Game1 extends JPanel implements ActionListener{
 			else if(posY < 244) posY = 203;
 			else posY = 264;
 
-			aliens.add(new Alien(posX, posY));
+			aliens.add(new Alien1(posX, posY));
 		}
 
-		Alien.setSpeed(3);
+		Alien1.setSpeed(3);
 	}
 
 
@@ -291,7 +291,7 @@ public class Game1 extends JPanel implements ActionListener{
         }
 
         //drawing of aliens
-        for (Alien a : aliens){
+        for (Alien1 a : aliens){
         	if(a.isVisible())
         		g.drawImage(a.getImage(), a.getX(), a.getY(), this);
         }
@@ -525,7 +525,7 @@ public class Game1 extends JPanel implements ActionListener{
 
 		for(int i = 0; i < aliens.size(); i++){
 
-			Alien a = aliens.get(i);
+			Alien1 a = aliens.get(i);
 			if(a.isVisible())
 				a.move();
 			else{
@@ -552,11 +552,11 @@ public class Game1 extends JPanel implements ActionListener{
 			else if(posY > 244 && posY < 305 && ennemies[4][2] == 0) aliens.add(new Alien(posX, 264));
 */
 
-			if(posX < 76 && ennemies[0][2] == 0) aliens.add(new Alien(20, posY)); //the condition on the enemies array is used to avoid an alien spawning on a line if there is already a wall in it
-			else if(posX > 76 && posX < 132 && ennemies[1][2] == 0) aliens.add(new Alien(90, posY));
-			else if(posX > 132 && posX < 188 && ennemies[2][2] == 0) aliens.add(new Alien(160, posY));
-			else if(posX > 188 && posX < 244 && ennemies[3][2] == 0) aliens.add(new Alien(210, posY));
-			else if(posX > 244 && posX < 305 && ennemies[4][2] == 0) aliens.add(new Alien(270, posY));
+			if(posX < 76 && ennemies[0][2] == 0) aliens.add(new Alien1(20, posY)); //the condition on the enemies array is used to avoid an alien spawning on a line if there is already a wall in it
+			else if(posX > 76 && posX < 132 && ennemies[1][2] == 0) aliens.add(new Alien1(90, posY));
+			else if(posX > 132 && posX < 188 && ennemies[2][2] == 0) aliens.add(new Alien1(160, posY));
+			else if(posX > 188 && posX < 244 && ennemies[3][2] == 0) aliens.add(new Alien1(210, posY));
+			else if(posX > 244 && posX < 305 && ennemies[4][2] == 0) aliens.add(new Alien1(270, posY));
 
 		}
 	}
@@ -780,7 +780,7 @@ public class Game1 extends JPanel implements ActionListener{
 
 		if(spawned%20==0 && spawned != 0){
 			back.setSpeed((back.getSpeed()+2)); ;
-			Alien.setSpeed((Alien.getSpeed()+2));
+			Alien1.setSpeed((Alien1.getSpeed()+2));
 			Life.setSpeed((Life.getSpeed()+2));
 			spawned++;
 			}
@@ -799,7 +799,7 @@ public class Game1 extends JPanel implements ActionListener{
         Rectangle rC = craft.getBounds(); //this method returns the rectangle of the craft
 
         //collision between the craft and the aliens
-        for (Alien alien : aliens){
+        for (Alien1 alien : aliens){
             Rectangle rA = alien.getBounds();
 
             if (rC.intersects(rA)) { //the intersects method simply verify if the two bounds touch
@@ -945,7 +945,7 @@ public class Game1 extends JPanel implements ActionListener{
             Rectangle rM = m.getBounds();
 
             //collision between the craft missiles and the aliens
-            for (Alien alien : aliens) {
+            for (Alien1 alien : aliens) {
 
                 Rectangle rA = alien.getBounds();
 
