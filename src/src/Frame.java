@@ -28,6 +28,7 @@ public class Frame extends JFrame implements ActionListener{
 	private Game1 game1;
 	private Menu menu;
 	private ScoreBoard scoreboard;
+	private ScoreBoardHard scoreboard_hard;
 	private Options options;
 	private Rules rules;
 	private Tutorial tutorial; 
@@ -169,6 +170,7 @@ public class Frame extends JFrame implements ActionListener{
 
 		if(delete){
 			scoreboard.deleteScores();
+			scoreboard_hard.deleteScores();
 			delete = false;
 		}
 	}
@@ -251,6 +253,16 @@ public class Frame extends JFrame implements ActionListener{
 
 		bg.play("gameover");
 	}
+	
+    public void gameOverHard(int pscore, int result, int life){
+		
+		scoreboard_hard.addScore(Frame.getPlayerName(), pscore);
+		content.add(scoreboard_hard, "ScoreBoard_Hard");
+		cl.show(content, "ScoreBoard_Hard");
+		
+		bg.play("gameover");
+	}
+
 	
 	public void TutorialIsEnd (int pscore, int result, int life) {
 		scoreboard.addScore(Frame.getPlayerName(), pscore);

@@ -379,7 +379,7 @@ public class Game1 extends JPanel implements ActionListener{
 		if(!ingame){
 			timer.stop();
 			Frame frame = Frame.getFrame();
-			frame.gameOver(score, spawned, life);
+			frame.gameOverHard(score, spawned, life);
 
 		}
 	}
