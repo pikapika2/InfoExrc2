@@ -47,11 +47,6 @@ public class Options extends JPanel implements ActionListener{
         c.gridy = 2;
         this.add(nameField, c);
 
-        Button skinButton = new Button("Change Skin");
-        skinButton.setName("skinButton");
-        c.gridy = 3;
-        this.add(skinButton, c);
-
         Button deleteButton = new Button("Delete scores");
         deleteButton.setName("deleteButton");
         c.gridy = 4;
@@ -63,7 +58,6 @@ public class Options extends JPanel implements ActionListener{
         this.add(okButton, c);
 
         Frame frame = Frame.getFrame();
-        skinButton.addActionListener(frame);
         deleteButton.addActionListener(frame);
         okButton.addActionListener(frame);
 	}
