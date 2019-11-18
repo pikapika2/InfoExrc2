@@ -378,7 +378,7 @@ public class Tutorial extends JPanel implements ActionListener{
             	g.setColor(Color.white);
             	g.drawString("~アイテムについて~", B_WIDTH/2 - 55, B_HEIGHT/2);
             	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("アイテムの説明", B_WIDTH/2 - 65, B_HEIGHT/2 + 20);
+            	g.drawString("横から飛んでくるのがアイテムです。回復、1回無敵、パワーアップなどがあります。", B_WIDTH/2 - 220, B_HEIGHT/2 + 20);
             	g.drawString("Tを押すとゲームに戻ります。もう一度Tを押すとチュートリアルを開きます", B_WIDTH/2 - 200, B_HEIGHT/2 + 40);
             }
 
