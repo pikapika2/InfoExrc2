@@ -81,10 +81,15 @@ public class Rules extends JPanel{
 		c.gridy = 2;
 		tab1.add(jinst2, c);
 
-		JLabel jinst3 = new JLabel("Use P to pause the game");
+		JLabel jinst3 = new JLabel("Use B to use BOMB");
 		Myfont.setMyfont(jinst3);
 		c.gridy = 3;
 		tab1.add(jinst3, c);
+
+		JLabel jinst4 = new JLabel("Use P to pause the game");
+		Myfont.setMyfont(jinst4);
+		c.gridy = 4;
+		tab1.add(jinst4, c);
 
 	}
 
@@ -157,18 +162,31 @@ public class Rules extends JPanel{
 		c.gridx = 2;
 		tab2.add(jlab6, c);
 
-		ImageIcon i4 = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_liferules.png"));
-		JLabel jlab7 = new JLabel(i4);
+		ImageIcon i5 = new ImageIcon(getClass().getResource("/bomb.png"));
+		JLabel jlab7 = new JLabel(i5);
 		c.anchor = GridBagConstraints.WEST;
 		c.gridy = 8;
 		c.gridx = 1;
 		tab2.add(jlab7, c);
 
-		JLabel jlab8 = new JLabel("1UP");
+		JLabel jlab8 = new JLabel("BOMB");
 		Myfont.setMyfont(jlab8);
 		c.gridy = 8;
 		c.gridx = 2;
 		tab2.add(jlab8, c);
+
+		ImageIcon i6 = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_liferules.png"));
+		JLabel jlab9 = new JLabel(i6);
+		c.anchor = GridBagConstraints.WEST;
+		c.gridy = 9;
+		c.gridx = 1;
+		tab2.add(jlab9, c);
+
+		JLabel jlab10 = new JLabel("1UP");
+		Myfont.setMyfont(jlab8);
+		c.gridy = 9;
+		c.gridx = 2;
+		tab2.add(jlab10, c);
 
 	}
 

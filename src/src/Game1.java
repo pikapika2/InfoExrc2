@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -58,14 +59,23 @@ public class Game1 extends JPanel implements ActionListener{
 	private ArrayList<Life> lives; //list of visible bonus lives
 	private ArrayList<Alien2> aliens2; //list of visible aliens2
 	private ArrayList<Bonus> bonus; //list of visible bonuses
+	private ArrayList<Bomb> bombs; // 流れてくるボムアイテムのリスト
 
 	private JPanel scorepan; //contains the score and the number of lives for the current game
 	private JLabel scorelab; //current score of the player
 	private JLabel lifelab; //current number of lives of the player
+	private	JLabel bomblab; // ボムが現在使用可能か表示
 
 	private boolean paused; //this boolean is set to true when the game is paused
 
 	private int[][] ennemies = new int[5][4]; //this array is used to know on which y level a wall is visible
+
+	private boolean canUseBomb;					// ボムが使用可能かどうか
+	private boolean isUsingBomb;				// ボムが爆発中かどうか
+	private int blastRadius;					// ボムの爆風の半径
+	private final int MAX_BLAST_RADIUS = 700;	// 爆風の半径の最大値(これを超えると爆発が終了)
+	private final int EXPLOSION_SPEED = 10;		// 爆風の速さ
+	private Point blastCenter;					// 爆風の中心座標
 
 	public Game1(){
 
@@ -114,6 +124,10 @@ public class Game1 extends JPanel implements ActionListener{
 		inboss = false;
 		paused = false;
 
+		canUseBomb = false;
+		isUsingBomb = false;
+		blastRadius = 0;
+
 		setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
 
 		craft = new Craft(ICRAFT_X, ICRAFT_Y);
@@ -124,12 +138,14 @@ public class Game1 extends JPanel implements ActionListener{
 		Alien1.setSpeed(3);
 		Life.setSpeed(5);
 		Bonus.setSpeed(5);
+		Bomb.setSpeed(5);
 
 		walls = new ArrayList<>();
 		lives = new ArrayList<>();
 		aliens = new ArrayList<>();
 		aliens2 = new ArrayList<>();
 		bonus = new ArrayList<>();
+		bombs = new ArrayList<>();
 
 		initScorepan();
 
@@ -190,18 +206,31 @@ public class Game1 extends JPanel implements ActionListener{
 		scorelab = new JLabel("Score : " + score);
 		Myfont.setMyfont(scorelab);
 		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 1;
+		c.gridx = 2;
 		c.anchor = GridBagConstraints.NORTH;
 		scorepan.add(scorelab, c);
+
 		lifelab = new JLabel("Life : " + life);
 		Myfont.setMyfont(lifelab);
 		if(craft.isImmune()) lifelab.setForeground(Color.white);
 		c.insets = new Insets(3,3,3,80);
 		c.fill = GridBagConstraints.BOTH;
-		c.gridx = 0;
+		c.gridx = 1;
 		c.anchor = GridBagConstraints.NORTH;
 		scorepan.add(lifelab, c);
 
+		if (canUseBomb) {
+			bomblab = new JLabel("BOMB");
+			bomblab.setForeground(Color.red);
+		} else {
+			bomblab = new JLabel("NOUSE");
+		}
+		Myfont.setMyfont(bomblab);
+		c.insets = new Insets(0, 20, 0, 40);
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		c.anchor = GridBagConstraints.NORTH;
+		scorepan.add(bomblab, c);
 	}
 
 	/*
@@ -320,6 +349,23 @@ public class Game1 extends JPanel implements ActionListener{
         		g.drawImage(a.getImage(), a.getX(), a.getY(), this);
         }
 
+		// ボムアイテムの描画
+		for (Bomb b : bombs) {
+			if (b.isVisible())
+				g2d.drawImage(b.getImage(), b.getX(), b.getY(), this);
+		}
+
+		// ボムの爆風の描画
+		if (isUsingBomb) {
+			g.setColor(new Color(0, 0, 0, 140));
+			g.fillOval(blastCenter.x - blastRadius, blastCenter.y - blastRadius, blastRadius * 2, blastRadius * 2);
+			blastRadius += EXPLOSION_SPEED;
+			if (blastRadius >= MAX_BLAST_RADIUS) {
+				blastRadius = 0;
+				isUsingBomb = false;
+			}
+		}
+
         //drawing of the pause screen
         //it's made of simple rectangles drawn on the top of the game board
         if(paused){
@@ -358,6 +404,7 @@ public class Game1 extends JPanel implements ActionListener{
 	        updateLives();
 	        updateBonus();
 	        updateAliens2();
+			updateBombs();
         }
 
         if(inboss) //in boss phase, there only is the boss and its missiles
@@ -475,6 +522,7 @@ public class Game1 extends JPanel implements ActionListener{
 		lives.removeAll(lives);
 		walls.removeAll(walls);
 		bonus.removeAll(bonus);
+		bombs.removeAll(bombs);
 
 		boss = new Boss(230,30);
 
@@ -772,7 +820,32 @@ public class Game1 extends JPanel implements ActionListener{
 		}
 
 	}
+	public void updateBombs(){
 
+		Random rand = new Random();
+		int spawn = rand.nextInt(1000);
+
+		if(spawn > 990 && bombs.size() == 0 && aliens2.size() == 0){
+			int posY = rand.nextInt(B_HEIGHT);
+			int posX = rand.nextInt(B_WIDTH) + 400;
+
+			if(posY < 76 && ennemies[0][2] == 0) bombs.add(new Bomb(posX, 20));
+			else if(posY > 76 && posY < 132 && ennemies[1][2] == 0) bombs.add(new Bomb(posX, 81));
+			else if(posY > 132 && posY < 188 && ennemies[2][2] == 0) bombs.add(new Bomb(posX, 142));
+			else if(posY > 188 && posY < 244 && ennemies[3][2] == 0) bombs.add(new Bomb(posX, 203));
+			else if(posY > 244 && posY < 305 && ennemies[4][2] == 0) bombs.add(new Bomb(posX, 264));
+
+		}
+
+		for (int i = 0; i <bombs.size(); i++) {
+			Bomb b = bombs.get(i);
+			if (b.isVisible()) {
+				b.move();
+			} else {
+				bombs.remove(i);
+			}
+		}
+	}
 	/*
 	 * When 20 aliens spawned, the speed of some elements is increased.
 	 */
@@ -882,6 +955,15 @@ public class Game1 extends JPanel implements ActionListener{
         			updateScorepan();}
         	}
         }
+		// ボムアイテムとcraftの衝突判定
+		for (Bomb b : bombs) {
+			Rectangle rB = b.getBounds();
+			if (rC.intersects(rB)) {
+				b.setVisible(false);
+				canUseBomb = true;
+				updateScorepan();
+			}
+		}
 
 	    if(inboss){
 	        Rectangle rB = boss.getBounds();
@@ -935,6 +1017,15 @@ public class Game1 extends JPanel implements ActionListener{
 
 	            }
             }
+	        // ボムが起爆中のとき
+			if (isUsingBomb) {
+				for (BossMissile n : mb) {
+					if (!n.isVisible()) { continue; }
+					if (isInBlast(n.getX(), n.getY())) {
+						n.setVisible(false);
+					}
+				}
+			}
 	    }
 
 
@@ -984,7 +1075,45 @@ public class Game1 extends JPanel implements ActionListener{
             		m.setVisible(false); //if a missile touches a wall, it disappear
             }
         }
+		// ボムが起爆中のとき
+		if (isUsingBomb) {
+			// alienとボムの当たり判定
+			for (Alien1 alien : aliens) {
+				if (!alien.isVisible()) { continue; }
+				if (isInBlast(alien.getX(), alien.getY())) {
+					alien.setVisible(false);
+					score++;
+					alien.playSound();
+					updateScorepan();
+				}
+			}
+			// alien2とボムの当たり判定
+			for (Alien2 alien2 : aliens2) {
+				if (!alien2.isVisible()) { continue; }
+				if (isInBlast(alien2.getX(), alien2.getY())) {
+					alien2.setVisible(false);
+					score += 2;
+					alien2.playSound();
+					updateScorepan();
+				}
+			}
+			// wallとボムの当たり判定
+			for (Wall wall : walls) {
+				if (!wall.isVisible()) { continue; }
+				if (isInBlast(wall.getX(), wall.getY())) {
+					wall.setVisible(false);
+					score += 3;
+					updateScorepan();
+				}
+			}
+		}
     }
+	private boolean isInBlast(int x1, int y1) {
+		int x2 = blastCenter.x;
+		int y2 = blastCenter.y;
+		int r = blastRadius;
+		return ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) <= r * r);
+	}
 
 	/*
 	 * This class is used to affect the key to a certain action
@@ -1007,7 +1136,13 @@ public class Game1 extends JPanel implements ActionListener{
 
 		@Override
 		public void keyPressed(KeyEvent e){
-
+			if (!isUsingBomb && canUseBomb && e.getKeyCode() == KeyEvent.VK_B) {
+				blastCenter = new Point(craft.getX() + craft.width/2, craft.getY() + craft.height/2);
+				canUseBomb = false;
+				isUsingBomb = true;
+				//Bomb.explode();
+				updateScorepan();
+			}
 			craft.keyPressed(e);
 
 		}
