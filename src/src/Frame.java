@@ -66,6 +66,7 @@ public class Frame extends JFrame implements ActionListener{
 	    bg.play("on"); //plays the launch sound
 
 	    scoreboard = new ScoreBoard();
+	    scoreboard_hard = new ScoreBoardHard();
 
 	    options = new Options();
 		content.add(options, "Options");
