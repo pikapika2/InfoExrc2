@@ -325,7 +325,7 @@ public class ScoreBoard extends JPanel implements ActionListener{
 	protected void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
-		ImageIcon ii = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_back2.png"));
+		ImageIcon ii = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_back3.png"));
         Image image = ii.getImage();
 		g.drawImage(image, -950, -100, null);
 		
