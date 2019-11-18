@@ -74,13 +74,13 @@ public class Menu extends JPanel{
 	protected void paintComponent(Graphics g){
 		
 		super.paintComponent(g);
-		ImageIcon ii = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_back.png"));
+		ImageIcon ii = new ImageIcon(getClass().getResource("/" + Frame.getTheme() + "_back2.png"));
         Image image = ii.getImage();
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(image, -950, -100, null);
 		
 		//a transparent white square is drawn on the background image to make it transparent
 		g.setColor(new Color(255,255,255,200)); //the fourth parameter, on a scale from 0 to 255, defines the opacity
-		g.fillRect(0, 0, 500, 500);
+		g.fillRect(0, 0, 700, 700);
 		
 	}
 
