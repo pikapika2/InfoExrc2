@@ -324,7 +324,7 @@ public class Game extends JPanel implements ActionListener{
         //it's made of simple rectangles drawn on the top of the game board
         if(paused){
         	g.setColor(new Color(0,0,0,150));
-        	g.fillRect(0, 0, 500, 500);
+        	g.fillRect(0, 0, 500, 800);
         	g.setColor(Color.gray);
         	g.fillRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 60);
         	g.setColor(Color.black);
