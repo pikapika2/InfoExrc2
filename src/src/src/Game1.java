@@ -1,3 +1,4 @@
+package src;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,11 +22,18 @@ import javax.swing.Timer;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
-
+/*
+ * The Game class is the core of the game.
+ * It manages the position and movement of every sprite in the game.
+ * The component are painted and updated every frame.
+ * The timer object is used to define the number of frame per second for this game.
+ * The class also manages the command key by ActionListener.
+ * The source code for the commands and the management of the sprite on the screen was taken from this tutorial :
+ * http://zetcode.com/tutorials/javagamestutorial/movingsprites/
+ */
 @SuppressWarnings("serial")
-public class Tutorial extends JPanel implements ActionListener{
-	
-	// ICRAFT = Player's position
+public class Game1 extends JPanel implements ActionListener{
+
 	private final int ICRAFT_X = 30; // x coordinate of the craft. can't be changed by the player
 	private final int ICRAFT_Y = 142; // initial y coordinate of the craft
 	private final int DELAY = 15; //delay between each refreshing the frame, in millisecond (nearly 60FPS)
@@ -56,18 +64,12 @@ public class Tutorial extends JPanel implements ActionListener{
 	private JLabel lifelab; //current number of lives of the player
 
 	private boolean paused; //this boolean is set to true when the game is paused
-	private boolean tuto = true;
-	private boolean tuto_mv = true;
-	private boolean tuto_st = false;
-	private boolean tuto_dm = false;
-	private boolean tuto_it = false;
 
 	private int[][] ennemies = new int[5][4]; //this array is used to know on which y level a wall is visible
 
-	
-    public Tutorial() {
-    
-    	initBoard();
+	public Game1(){
+
+		initBoard();
 
 	}
 
@@ -210,9 +212,19 @@ public class Tutorial extends JPanel implements ActionListener{
 	 */
 	public void initAliens(){
 
-		int posY = 142;
-		int posX =  740;
-		aliens.add(new Alien(posX, posY));
+		for(int i = 0; i<5; i++){
+			Random rand = new Random();
+			int posY = rand.nextInt(B_HEIGHT);
+			int posX = rand.nextInt(B_WIDTH) + 500;
+
+			if(posY < 76) posY = 20;
+			else if(posY < 132) posY = 81;
+			else if(posY < 188) posY = 142;
+			else if(posY < 244) posY = 203;
+			else posY = 264;
+
+			aliens.add(new Alien(posX, posY));
+		}
 
 		Alien.setSpeed(3);
 	}
@@ -319,71 +331,11 @@ public class Tutorial extends JPanel implements ActionListener{
         	g.drawRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 60);
         	Myfont.setGraphicFont(g);
         	g.setColor(Color.white);
-        	g.drawString("繝昴�ｼ繧ｺ荳ｭ", B_WIDTH/2 - 20, B_HEIGHT/2);
+        	g.drawString("Game Paused", B_WIDTH/2 - 60, B_HEIGHT/2);
         	Myfont.setGraphicFontSize(g, 10);
-        	g.drawString("P繧呈款縺吶→繧ｲ繝ｼ繝�縺ｫ謌ｻ繧翫∪縺吶��", B_WIDTH/2 - 60, B_HEIGHT/2 + 20);
+        	g.drawString("Press P to  resume", B_WIDTH/2 - 60, B_HEIGHT/2 + 20);
         }
-        if (tuto) {
-        	if(tuto_mv){
-            	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
-            	g.setColor(Color.gray);
-            	g.fillRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 80);
-            	g.setColor(Color.black);
-            	g.drawRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 80);
-            	Myfont.setGraphicFont(g);
-            	g.setColor(Color.white);
-            	g.drawString("~遘ｻ蜍輔↓縺､縺�縺ｦ~", B_WIDTH/2 - 35, B_HEIGHT/2);
-            	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("遏｢蜊ｰ繧ｭ繝ｼ(竊�,竊�,竊�,竊�)縺ｧ遘ｻ蜍輔＠縺ｾ縺吶��", B_WIDTH/2 - 85, B_HEIGHT/2 + 20);
-            	g.drawString("T繧呈款縺吶→谺｡縺ｫ騾ｲ縺ｿ縺ｾ縺吶��", B_WIDTH/2 - 60, B_HEIGHT/2 + 40);
-            }
-            if(tuto_st){
-            	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
-            	g.setColor(Color.gray);
-            	g.fillRect(B_WIDTH/2 - 175, B_HEIGHT/2 - 25, 350, 80);
-            	g.setColor(Color.black);
-            	g.drawRect(B_WIDTH/2 - 175, B_HEIGHT/2 - 25, 350, 80);
-            	Myfont.setGraphicFont(g);
-            	g.setColor(Color.white);
-            	g.drawString("~謾ｻ謦�縺ｫ縺､縺�縺ｦ~", B_WIDTH/2 - 45, B_HEIGHT/2);
-            	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("繧ｹ繝壹�ｼ繧ｹ繧ｭ繝ｼ縺ｧ謾ｻ謦�縺励∪縺吶�る聞謚ｼ縺励〒騾｣蟆�縺励∪縺吶��", B_WIDTH/2 - 135, B_HEIGHT/2 + 20);
-            	g.drawString("T繧呈款縺吶→谺｡縺ｫ騾ｲ縺ｿ縺ｾ縺�", B_WIDTH/2 - 70, B_HEIGHT/2 + 40);
-            }
-            if(tuto_dm){
-            	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
-            	g.setColor(Color.gray);
-            	g.fillRect(B_WIDTH/2 - 200, B_HEIGHT/2 - 35, 400, 100);
-            	g.setColor(Color.black);
-            	g.drawRect(B_WIDTH/2 - 200, B_HEIGHT/2 - 35, 400, 100);
-            	Myfont.setGraphicFont(g);
-            	g.setColor(Color.white);
-            	g.drawString("~繝�繝｡繝ｼ繧ｸ縺ｫ縺､縺�縺ｦ~", B_WIDTH/2 - 50, B_HEIGHT/2-10);
-            	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("謨ｵ縺ｫ蠖薙◆繧九→繝�繝｡繝ｼ繧ｸ繧貞女縺代∪縺吶��0縺ｧ繧ｲ繝ｼ繝�繧ｪ繝ｼ繝舌�ｼ縺ｧ縺吶��", B_WIDTH/2 - 155, B_HEIGHT/2 + 10);
-            	g.drawString("蛟偵○縺ｪ縺�謨ｵ=螢√↓蠖薙◆繧九→荳�逋ｺ繧ｲ繝ｼ繝�繧ｪ繝ｼ繝舌�ｼ縺ｧ縺吶��", B_WIDTH/2 - 135, B_HEIGHT/2 + 30);
-            	g.drawString("T繧呈款縺吶→谺｡縺ｫ騾ｲ縺ｿ縺ｾ縺�", B_WIDTH/2 - 55, B_HEIGHT/2 + 50);
-            }
-            if(tuto_it){                            //after
-            	g.setColor(new Color(0,0,0,150));
-            	g.fillRect(0, 0, 500, 500);
-            	g.setColor(Color.gray);
-            	g.fillRect(0, B_HEIGHT/2 - 25, 480, 80);
-            	g.setColor(Color.black);
-            	g.drawRect(0, B_HEIGHT/2 - 25, 480, 80);
-            	Myfont.setGraphicFont(g);
-            	g.setColor(Color.white);
-            	g.drawString("~繧｢繧､繝�繝�縺ｫ縺､縺�縺ｦ~", B_WIDTH/2 - 55, B_HEIGHT/2);
-            	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("繧ｹ繝壹�ｼ繧ｹ繧ｭ繝ｼ縺ｧ謾ｻ謦�縺励∪縺吶��", B_WIDTH/2 - 65, B_HEIGHT/2 + 20);
-            	g.drawString("T繧呈款縺吶→繧ｲ繝ｼ繝�縺ｫ謌ｻ繧翫∪縺吶�ゅｂ縺�荳�蠎ｦT繧呈款縺吶→繝√Η繝ｼ繝医Μ繧｢繝ｫ繧帝幕縺阪∪縺�", B_WIDTH/2 - 200, B_HEIGHT/2 + 40);
-            }
 
-        }
-        
 	}
 
 	/*
@@ -395,10 +347,6 @@ public class Tutorial extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 
 		inGame();
-		
-		if (tuto == true) {
-			doTuto();
-		}
 
 		updateBackground();
 		updateMissiles();
@@ -415,7 +363,7 @@ public class Tutorial extends JPanel implements ActionListener{
         if(inboss) //in boss phase, there only is the boss and its missiles
         	updateBoss();
 
-//        updateSpeed(); //upgrade the speed of some sprite to increase the difficulty of the game
+        updateSpeed(); //upgrade the speed of some sprite to increase the difficulty of the game
 
         checkCollisions(); //the collisions between sprites are checked to see if they are still visible
 
@@ -431,7 +379,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		if(!ingame){
 			timer.stop();
 			Frame frame = Frame.getFrame();
-			frame.TutorialIsEnd(score, spawned, life);
+			frame.gameOver(score, spawned, life);
 
 		}
 	}
@@ -451,33 +399,6 @@ public class Tutorial extends JPanel implements ActionListener{
 		else{
 			timer.start();
 			paused = false;
-		}
-	}
-	
-	public void doTuto() {
-		if (timer.isRunning()) {
-			tuto = true;
-			repaint();
-			timer.stop();
-		}else {
-			timer.start();
-			tuto = false;
-			tuto_it = false; tuto_mv = true;
-		}
-	}
-	
-	public void NextTuto() {
-		if (tuto_mv) {
-			tuto_mv = false; tuto_st = true;
-			repaint();
-		}else if(tuto_st) {
-			tuto_st = false; tuto_dm = true;
-			repaint();
-		}else if(tuto_dm) {
-			tuto_dm = false; tuto_it = true;
-			repaint();
-		}else {
-			doTuto();
 		}
 	}
 
@@ -613,10 +534,11 @@ public class Tutorial extends JPanel implements ActionListener{
 				}
 		}
 
+		//隰ｨ�ｽｵ騾墓ｻ難ｿｽ�ｿｽ
 		Random rand = new Random();
 		int spawn = rand.nextInt(1000);
 
-		if(spawn > 980 && aliens.size() < 10){
+		if(spawn > 900 && aliens.size() < 10){
 			//int posY = rand.nextInt(B_HEIGHT);
 			int posY = rand.nextInt(B_HEIGHT) - 500;//2019_11_04
 			//int posX = rand.nextInt(B_WIDTH) + 400;
@@ -714,7 +636,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		Random rand = new Random();
 		int spawn = rand.nextInt(1000);
 
-		if(spawn > 990 && lives.size() == 0 && aliens2.size() == 0){
+		if(spawn > 950 && lives.size() == 0 && aliens2.size() == 0){
 			int posY = rand.nextInt(B_HEIGHT);
 			int posX = rand.nextInt(B_WIDTH) + 400;
 
@@ -746,7 +668,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		Random rand = new Random();
 		int spawn = rand.nextInt(1000);
 
-		if(spawn > 995 && bonus.size() == 0){
+		if(spawn > 996 && bonus.size() == 0){
 			int posY = rand.nextInt(B_HEIGHT);
 
 			if(posY < 76) posY = 20;
@@ -786,7 +708,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		Random rand = new Random();
 		int spawn = rand.nextInt(1000);
 
-		if(spawn > 990 && aliens2.size()==0 && lives.size()==0){
+		if(spawn > 950 && aliens2.size()==0 && lives.size()==0){
 			//int posY = rand.nextInt(B_HEIGHT);
 			//int posX = rand.nextInt(B_WIDTH) + 400;
 
@@ -822,7 +744,7 @@ public class Tutorial extends JPanel implements ActionListener{
 	/*
 	 * When 20 aliens spawned, the speed of some elements is increased.
 	 */
-/**	public void updateSpeed(){
+	public void updateSpeed(){
 
 		if(spawned%20==0 && spawned != 0){
 			back.setSpeed((back.getSpeed()+1)); ;
@@ -832,7 +754,7 @@ public class Tutorial extends JPanel implements ActionListener{
 			}
 
 	}
-**/
+
 	/*
 	 * The collisions between sprites are verified by simple rectangles (bounds)
 	 * The detection is then not really good because the picture of the player is not a rectangle
@@ -1047,21 +969,9 @@ public class Tutorial extends JPanel implements ActionListener{
 
 			if(e.getKeyCode() == KeyEvent.VK_P)
 				doPause();
-			
-			if(e.getKeyCode() == KeyEvent.VK_T) {
-				if (!tuto) {
-					doTuto();
-				}else {
-					NextTuto();
-				}
-			}	
-			if(e.getKeyCode() == KeyEvent.VK_H)
-				if (!tuto) {
-					ingame = !ingame;
-				}				
+
+
 		}
-		
-		
 
 		@Override
 		public void keyPressed(KeyEvent e){

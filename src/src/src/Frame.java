@@ -25,6 +25,7 @@ public class Frame extends JFrame implements ActionListener{
 	private JPanel content = new JPanel(); //this JPanel will contain the different panels
 	//the five panels for the program :
 	private Game game;
+	private Game1 game1;
 	private Menu menu;
 	private ScoreBoard scoreboard;
 	private Options options;
@@ -97,13 +98,12 @@ public class Frame extends JFrame implements ActionListener{
 			delete = true;
 		else if(((JButton)e.getSource()).getName().equals("No"))
 			delete = false;
-<<<<<<< HEAD
+
 		else if(((JButton)e.getSource()).getName().equals("startButton_hard"))  //2019/11/15
 			doStart1();
 		else if(((JButton)e.getSource()).getName().equals("TitleButton"))  //2019/11/15
 			doExitRules();
-=======
->>>>>>> origin/master
+
 
 	}
 
@@ -202,7 +202,7 @@ public class Frame extends JFrame implements ActionListener{
 		cl.show(content, "Game");
 		bg.play("game");
 	}
-<<<<<<< HEAD
+
 	
 	public void doTryAgain_hard(){
 		game1 = new Game1();
@@ -210,8 +210,6 @@ public class Frame extends JFrame implements ActionListener{
 		cl.show(content, "Game1");
 		bg.play("game");
 	}
-=======
->>>>>>> origin/master
 
 	/*
 	 * This launches the game from the menu panel.
@@ -224,8 +222,7 @@ public class Frame extends JFrame implements ActionListener{
 		cl.show(content, "Game");
 		bg.play("game");
 	}
-	
-<<<<<<< HEAD
+
 	public void doStart1(){  //2019/11/15
 		
 		game1 = new Game1();
@@ -234,9 +231,6 @@ public class Frame extends JFrame implements ActionListener{
 		bg.play("game");
 	}
 	
-	
-=======
->>>>>>> origin/master
 	public void doTutorial() {
 		
 		tutorial = new Tutorial();
