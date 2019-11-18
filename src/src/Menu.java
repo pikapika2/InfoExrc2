@@ -31,28 +31,34 @@ public class Menu extends JPanel{
        c.gridy = 0;
        this.add(instructions, c);
        
-       Button startButton = new Button("New Game");
+       Button startButton = new Button("New GameÅ@Easy");
        startButton.setName("startButton");
        c.gridy = 2;
        this.add(startButton, c);
        
+       Button startButton_hard = new Button("New Game Hard");
+       startButton_hard.setName("startButton_hard");
+       c.gridy = 3;
+       this.add(startButton_hard, c);
+       
        Button optionButton = new Button("Options");
        optionButton.setName("optionsButton");
-       c.gridy = 3;
+       c.gridy = 4;
        this.add(optionButton, c);
        
        Button rulesButton = new Button("Rules");
        rulesButton.setName("rulesButton");
-       c.gridy = 4;
+       c.gridy = 5;
        this.add(rulesButton, c);
 
        Button tutorialButton = new Button("Tutorial");
        tutorialButton.setName("tutorialButton");
-       c.gridy = 5;
+       c.gridy = 6;
        this.add(tutorialButton, c);
              
        Frame frame = Frame.getFrame();
        startButton.addActionListener(frame);
+       startButton_hard.addActionListener(frame);
        optionButton.addActionListener(frame);
        rulesButton.addActionListener(frame);
        tutorialButton.addActionListener(frame);
