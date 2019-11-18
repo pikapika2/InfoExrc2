@@ -1,4 +1,3 @@
-package src;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,7 +43,7 @@ public class Tutorial extends JPanel implements ActionListener{
 	private boolean ingame; //this boolean is set to false when the player loses
 	private boolean inboss; // this boolean is set to true during the boss phase
 	private final int B_WIDTH = 480; //width of the board
-	private final int B_HEIGHT = 680; //height of the board 340
+	private final int B_HEIGHT = 340; //height of the board
 
 	private ArrayList<Alien> aliens; //list of visible aliens
 	private ArrayList<Wall> walls; //list of visible walls
@@ -241,7 +240,6 @@ public class Tutorial extends JPanel implements ActionListener{
 		//g.drawImage(back.getImage(), -back.getPosX(), 0, this);
 		g.drawImage(back.getImage(), 0, -back.getPosY(), this);
 		//2019-11-02
-
 		if (back.getPosY() + 500 > back.getHeight()) {
             g.drawImage(back.getImage(), 0, - back.getPosY() + back.getHeight(), this);
         }
@@ -320,11 +318,9 @@ public class Tutorial extends JPanel implements ActionListener{
         	g.drawRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 60);
         	Myfont.setGraphicFont(g);
         	g.setColor(Color.white);
-
-        	g.drawString("驛｢譎�莠｢�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｼ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｺ髣包ｽｳ�ｿｽ�ｽｽ�ｽｭ", B_WIDTH/2 - 20, B_HEIGHT/2);
+        	g.drawString("ポーズ中", B_WIDTH/2 - 20, B_HEIGHT/2);
         	Myfont.setGraphicFontSize(g, 10);
-        	g.drawString("P驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁�､�ｽｹ�ｽｧ�ｿｽ�ｽｽ�ｽｲ驛｢譎｢�ｽｽ�ｽｼ驛｢譎｢�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ髫ｰ魃会ｽｽ�ｽｻ驛｢�ｽｧ驗呻ｽｫ遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 60, B_HEIGHT/2 + 20);
-
+        	g.drawString("Pを押すとゲームに戻ります。", B_WIDTH/2 - 60, B_HEIGHT/2 + 20);
         }
         if (tuto) {
         	if(tuto_mv){
@@ -336,12 +332,10 @@ public class Tutorial extends JPanel implements ActionListener{
             	g.drawRect(B_WIDTH/2 - 100, B_HEIGHT/2 - 25, 220, 80);
             	Myfont.setGraphicFont(g);
             	g.setColor(Color.white);
-
-            	g.drawString("~鬩募∞�ｽｽ�ｽｻ髯ｷ蟠趣ｽｼ謚ｫ�ｿｽ骰具ｽｸ�ｽｺ�ｿｽ�ｽｽ�ｽ､驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｦ~", B_WIDTH/2 - 35, B_HEIGHT/2);
+            	g.drawString("~移動について~", B_WIDTH/2 - 35, B_HEIGHT/2);
             	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("鬩墓得�ｽｽ�ｽ｢髯ｷ螂�ｽｽ�ｽｰ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｭ驛｢譎｢�ｽｽ�ｽｼ(驕ｶ螂�ｽｿ�ｽｽ,驕ｶ螂�ｽｿ�ｽｽ,驕ｶ螂�ｽｿ�ｽｽ,驕ｶ螂�ｽｿ�ｽｽ)驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ鬩募∞�ｽｽ�ｽｻ髯ｷ蟠趣ｽｼ雋ｻ�ｽｼ�ｿｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 85, B_HEIGHT/2 + 20);
-            	g.drawString("T驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁ｮ夲ｽｰ�ｽｺ�ｿｽ�ｽｽ�ｽ｡驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ鬯ｨ�ｽｾ�ｿｽ�ｽｽ�ｽｲ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｿ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 60, B_HEIGHT/2 + 40);
-//>>>>>>> 67c839145ea3da9ea78a9d84be11496051a4f6de
+            	g.drawString("矢印キー(↑,←,↓,→)で移動します。", B_WIDTH/2 - 85, B_HEIGHT/2 + 20);
+            	g.drawString("Tを押すと次に移ります。", B_WIDTH/2 - 60, B_HEIGHT/2 + 40);
             }
             if(tuto_st){
             	g.setColor(new Color(0,0,0,150));
@@ -352,12 +346,10 @@ public class Tutorial extends JPanel implements ActionListener{
             	g.drawRect(B_WIDTH/2 - 175, B_HEIGHT/2 - 25, 350, 80);
             	Myfont.setGraphicFont(g);
             	g.setColor(Color.white);
-
-            	g.drawString("~髫ｰ�ｽｾ�ｿｽ�ｽｽ�ｽｻ髫ｰ�ｽｦ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽ､驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｦ~", B_WIDTH/2 - 45, B_HEIGHT/2);
+            	g.drawString("~攻撃について~", B_WIDTH/2 - 45, B_HEIGHT/2);
             	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｹ驛｢譎擾ｽ｣�ｽｹ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｼ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｹ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｭ驛｢譎｢�ｽｽ�ｽｼ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ髫ｰ�ｽｾ�ｿｽ�ｽｽ�ｽｻ髫ｰ�ｽｦ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ陷会ｽｱ遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ郢ｧ邇問裸髫ｰ螟ｲ�ｽｽ�ｽｼ驍ｵ�ｽｺ陷会ｽｱ邵ｲ蟶晢ｽｨ�ｽｾ�ｿｽ�ｽｽ�ｽ｣髯晢ｿｽ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ陷会ｽｱ遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 135, B_HEIGHT/2 + 20);
-            	g.drawString("T驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁ｮ夲ｽｰ�ｽｺ�ｿｽ�ｽｽ�ｽ｡驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ鬯ｨ�ｽｾ�ｿｽ�ｽｽ�ｽｲ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｿ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｾ驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 70, B_HEIGHT/2 + 40);
-//>>>>>>> 67c839145ea3da9ea78a9d84be11496051a4f6de
+            	g.drawString("スペースキーで攻撃します。長押しで連射出来ます。", B_WIDTH/2 - 135, B_HEIGHT/2 + 20);
+            	g.drawString("Tを押すと次に移ります。", B_WIDTH/2 - 70, B_HEIGHT/2 + 40);
             }
             if(tuto_dm){
             	g.setColor(new Color(0,0,0,150));
@@ -368,13 +360,11 @@ public class Tutorial extends JPanel implements ActionListener{
             	g.drawRect(B_WIDTH/2 - 200, B_HEIGHT/2 - 35, 400, 100);
             	Myfont.setGraphicFont(g);
             	g.setColor(Color.white);
-
-            	g.drawString("~驛｢譎｢�ｽｿ�ｽｽ驛｢譎｢�ｽｽ�ｽ｡驛｢譎｢�ｽｽ�ｽｼ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｸ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽ､驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｦ~", B_WIDTH/2 - 50, B_HEIGHT/2-10);
+            	g.drawString("~ダメージについて~", B_WIDTH/2 - 50, B_HEIGHT/2-10);
             	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("髫ｰ�ｽｨ�ｿｽ�ｽｽ�ｽｵ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ髯溷�ｶ萓ｭ隨ｳ�ｿｽ驛｢�ｽｧ闕ｵ譏ｶ�ｿｽ蝣､�ｽｹ譎｢�ｽｿ�ｽｽ驛｢譎｢�ｽｽ�ｽ｡驛｢譎｢�ｽｽ�ｽｼ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｸ驛｢�ｽｧ髮区ｧｫ�ｽ･�ｽｳ驍ｵ�ｽｺ闔会ｽ｣遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ0驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｲ驛｢譎｢�ｽｽ�ｽｼ驛｢譎｢�ｽｿ�ｽｽ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｪ驛｢譎｢�ｽｽ�ｽｼ驛｢譎�ｿｽ魃会ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｼ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 155, B_HEIGHT/2 + 10);
-            	g.drawString("髯区ｺｷ�ｿｽ�ｽｵ隨ｳ迢暦ｽｸ�ｽｺ�ｿｽ�ｽｽ�ｽｪ驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ髫ｰ�ｽｨ�ｿｽ�ｽｽ�ｽｵ=髯橸ｽ｢遶丞｣ｺ�ｿｽ讌｢�ｿｽ蜀ｶ萓ｭ隨ｳ�ｿｽ驛｢�ｽｧ闕ｵ譏ｶ�ｿｽ螳壼初�ｿｽ�ｽｿ�ｽｽ鬨ｾ蜈ｷ�ｽｽ�ｽｺ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｲ驛｢譎｢�ｽｽ�ｽｼ驛｢譎｢�ｽｿ�ｽｽ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｪ驛｢譎｢�ｽｽ�ｽｼ驛｢譎�ｿｽ魃会ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｼ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 135, B_HEIGHT/2 + 30);
-            	g.drawString("T驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁ｮ夲ｽｰ�ｽｺ�ｿｽ�ｽｽ�ｽ｡驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ鬯ｨ�ｽｾ�ｿｽ�ｽｽ�ｽｲ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｿ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｾ驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 55, B_HEIGHT/2 + 50);
-//>>>>>>> 67c839145ea3da9ea78a9d84be11496051a4f6de
+            	g.drawString("敵にぶつかるとダメージを受けます。", B_WIDTH/2 - 155, B_HEIGHT/2 + 10);
+            	g.drawString("倒せない敵=壁に当たるとゲームオーバーです。", B_WIDTH/2 - 135, B_HEIGHT/2 + 30);
+            	g.drawString("Tを押すと次に移ります。", B_WIDTH/2 - 55, B_HEIGHT/2 + 50);
             }
             if(tuto_it){                            //after
             	g.setColor(new Color(0,0,0,150));
@@ -385,12 +375,10 @@ public class Tutorial extends JPanel implements ActionListener{
             	g.drawRect(0, B_HEIGHT/2 - 25, 480, 80);
             	Myfont.setGraphicFont(g);
             	g.setColor(Color.white);
-
-            	g.drawString("~驛｢�ｽｧ�ｿｽ�ｽｽ�ｽ｢驛｢�ｽｧ�ｿｽ�ｽｽ�ｽ､驛｢譎｢�ｽｿ�ｽｽ驛｢譎｢�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽ､驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｦ~", B_WIDTH/2 - 55, B_HEIGHT/2);
+            	g.drawString("~アイテムについて~", B_WIDTH/2 - 55, B_HEIGHT/2);
             	Myfont.setGraphicFontSize(g, 10);
-            	g.drawString("驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｹ驛｢譎擾ｽ｣�ｽｹ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｽ�ｽｼ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｹ驛｢�ｽｧ�ｿｽ�ｽｽ�ｽｭ驛｢譎｢�ｽｽ�ｽｼ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｧ髫ｰ�ｽｾ�ｿｽ�ｽｽ�ｽｻ髫ｰ�ｽｦ�ｿｽ�ｽｿ�ｽｽ驍ｵ�ｽｺ陷会ｽｱ遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 65, B_HEIGHT/2 + 20);
-            	g.drawString("T驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁�､�ｽｹ�ｽｧ�ｿｽ�ｽｽ�ｽｲ驛｢譎｢�ｽｽ�ｽｼ驛｢譎｢�ｽｿ�ｽｽ驍ｵ�ｽｺ�ｿｽ�ｽｽ�ｽｫ髫ｰ魃会ｽｽ�ｽｻ驛｢�ｽｧ驗呻ｽｫ遶擾ｽｪ驍ｵ�ｽｺ陷ｷ�ｽｶ�ｿｽ�ｽｿ�ｽｽ郢ｧ�ｿｽ�ｿｽ�ｽｽ繧会ｽｸ�ｽｺ�ｿｽ�ｽｿ�ｽｽ髣包ｽｳ�ｿｽ�ｽｿ�ｽｽ髯溯ｶ｣�ｽｽ�ｽｦT驛｢�ｽｧ陷ｻ蝓滂ｽｬ�ｽｾ驍ｵ�ｽｺ陷ｷ�ｽｶ遶雁�､�ｽｹ譏ｶ�ｿｽ蠅�遉ｼ�ｽｹ譎｢�ｽｽ�ｽｼ驛｢譎冗樟�ｾ取㏍�ｽｹ�ｽｧ�ｿｽ�ｽｽ�ｽ｢驛｢譎｢�ｽｽ�ｽｫ驛｢�ｽｧ陝ｶ譎擾ｽｹ諷包ｽｸ�ｽｺ鬮ｦ�ｽｪ遶擾ｽｪ驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ", B_WIDTH/2 - 200, B_HEIGHT/2 + 40);
-//>>>>>>> 67c839145ea3da9ea78a9d84be11496051a4f6de
+            	g.drawString("アイテムの説明", B_WIDTH/2 - 65, B_HEIGHT/2 + 20);
+            	g.drawString("Tを押すとゲームに戻ります。もう一度Tを押すとチュートリアルを開きます", B_WIDTH/2 - 200, B_HEIGHT/2 + 40);
             }
 
         }
@@ -607,9 +595,7 @@ public class Tutorial extends JPanel implements ActionListener{
 		//TODO
 		//to move away
 		//boucle boss
-
-		if(craft.getShoot()>0 && spawned > 20 && score < 30){//鬩幢ｽ｢隴趣ｿｽ郢ｹ�ｽｱ驍ｵ�ｽｺ�ｿｽ�ｽｿ�ｽｽ
-//>>>>>>> 67c839145ea3da9ea78a9d84be11496051a4f6de
+		if(craft.getShoot()>0 && spawned > 20 && score < 30){
 			inboss = true;
 			initBoss();
 			return;
